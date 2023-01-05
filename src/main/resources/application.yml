@@ -1,6 +1,11 @@
 server:
   port: 8080
 spring:
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: https://www.googleapis.com/service_accounts/v1/jwk/securetoken%40system.gserviceaccount.com
   jpa:
     hibernate:
       ddl-auto: create-drop
@@ -13,3 +18,4 @@ spring:
     password: password
   h2:
     console.enabled: true
+
