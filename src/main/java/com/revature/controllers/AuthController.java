@@ -3,53 +3,41 @@ package com.revature.controllers;
 import com.revature.dtos.LoginRequest;
 import com.revature.dtos.RegisterRequest;
 import com.revature.models.User;
-import com.revature.services.AuthService;
+import com.revature.services.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpSession;
 import java.util.Optional;
 
 @RestController
 @RequestMapping("/auth")
-@CrossOrigin(origins = {"http://localhost:4200", "http://localhost:3000"}, allowCredentials = "true")
+@CrossOrigin(origins = "http://localhost:4200", allowedHeaders = "*", exposedHeaders = "*", allowCredentials = "true")
 public class AuthController {
 
-    private final AuthService authService;
+    private final UserService userService;
 
-    public AuthController(AuthService authService) {
-        this.authService = authService;
+    @Autowired
+    public AuthController(UserService userService) {
+        this.userService = userService;
     }
 
     @PostMapping("/login")
-    public ResponseEntity<User> login(@RequestBody LoginRequest loginRequest, HttpSession session) {
-        Optional<User> optional = authService.findByCredentials(loginRequest.getEmail(), loginRequest.getPassword());
+    public ResponseEntity<User> login(@RequestBody LoginRequest loginRequest) {
+        Optional<User> optional = userService.login(loginRequest.getEmail(), loginRequest.getPassword());
 
-        if(!optional.isPresent()) {
+        if(optional.isEmpty()) {
             return ResponseEntity.badRequest().build();
         }
-
-        session.setAttribute("user", optional.get());
 
         return ResponseEntity.ok(optional.get());
     }
 
-    @PostMapping("/logout")
-    public ResponseEntity<Void> logout(HttpSession session) {
-        session.removeAttribute("user");
-
-        return ResponseEntity.ok().build();
-    }
-
     @PostMapping("/register")
     public ResponseEntity<User> register(@RequestBody RegisterRequest registerRequest) {
-        User created = new User(0,
-                registerRequest.getEmail(),
-                registerRequest.getPassword(),
-                registerRequest.getFirstName(),
-                registerRequest.getLastName());
+        User created = new User(registerRequest);
 
-        return ResponseEntity.status(HttpStatus.CREATED).body(authService.register(created));
+        return ResponseEntity.status(HttpStatus.CREATED).body(userService.register(created));
     }
 }

@@ -1,5 +1,6 @@
 package com.revature.models;
 
+import com.revature.dtos.RegisterRequest;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -20,4 +21,11 @@ public class User {
     private String password;
     private String firstName;
     private String lastName;
+
+    public User(RegisterRequest registerRequest) {
+        this.email = registerRequest.getEmail();
+        this.password = registerRequest.getPassword();
+        this.firstName = registerRequest.getFirstName();
+        this.lastName = registerRequest.getLastName();
+    }
 }
