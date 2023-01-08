@@ -1,6 +1,12 @@
 server:
   port: 8080
+  servlet:
+    context-path: /
+
 spring:
+  application:
+    name: High Score IO
+
   security:
     oauth2:
       resourceserver:
@@ -10,9 +16,14 @@ spring:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     show-sql: true
     generate-ddl: true
+
   datasource:
     url: jdbc:postgresql://Revature-socialmedia-p3.c4a5ytscplod.us-east-1.rds.amazonaws.com:5432/postgres
     driver-class-name: org.postgresql.Driver
     username: postgres
     password: RevCapstone123!
+
+  aop:
+    auto: true
+    proxy-target-class: true
 
