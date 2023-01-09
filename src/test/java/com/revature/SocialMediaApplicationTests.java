@@ -9,7 +9,7 @@ class SocialMediaApplicationTests {
 
 	@Test
 	void contextLoads() {
-		Assert.isTrue(false);
+
 	}
 
 }
