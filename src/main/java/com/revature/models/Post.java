@@ -26,4 +26,6 @@ public class Post {
 	private User author;
 
 	private PostType postType;
+
+	private int likes;
 }
