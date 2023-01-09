@@ -1,6 +1,6 @@
 package com.revature.models;
 
-import com.revature.dtos.RegisterRequest;
+import com.revature.dtos.RequestUser;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,14 +18,10 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String email;
-    private String password;
-    private String firstName;
-    private String lastName;
+    private String username;
 
-    public User(RegisterRequest registerRequest) {
-        this.email = registerRequest.getEmail();
-        this.password = registerRequest.getPassword();
-        this.firstName = registerRequest.getFirstName();
-        this.lastName = registerRequest.getLastName();
+    public User(RequestUser requestUser) {
+        this.email = requestUser.getEmail();
+        this.username = requestUser.getUsername();
     }
 }
