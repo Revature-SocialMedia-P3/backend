@@ -9,6 +9,10 @@ class SocialMediaApplicationTests {
 
 	@Test
 	void contextLoads() {
+
+
+
+
 	}
 
 }
