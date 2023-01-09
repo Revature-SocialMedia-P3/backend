@@ -1,55 +1,29 @@
 package com.revature.controllers;
 
-import com.revature.dtos.LoginRequest;
-import com.revature.dtos.RegisterRequest;
+import com.revature.dtos.RequestUser;
 import com.revature.models.User;
-import com.revature.services.AuthService;
-import org.springframework.http.HttpStatus;
+import com.revature.services.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpSession;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/auth")
-@CrossOrigin(origins = {"http://localhost:4200", "http://localhost:3000"}, allowCredentials = "true")
+@CrossOrigin(origins = {"http://localhost:4200", "http://localhost:5555"}, allowedHeaders = "*", exposedHeaders = "*", allowCredentials = "true", maxAge = 3600)
 public class AuthController {
 
-    private final AuthService authService;
+    private final UserService userService;
 
-    public AuthController(AuthService authService) {
-        this.authService = authService;
+    @Autowired
+    public AuthController(UserService userService) {
+        this.userService = userService;
     }
 
-    @PostMapping("/login")
-    public ResponseEntity<User> login(@RequestBody LoginRequest loginRequest, HttpSession session) {
-        Optional<User> optional = authService.findByCredentials(loginRequest.getEmail(), loginRequest.getPassword());
+    @PostMapping("/get-user")
+    public ResponseEntity<User> getUser(@RequestBody RequestUser requestUser) {
+        User user = this.userService.getUser(requestUser);
 
-        if(!optional.isPresent()) {
-            return ResponseEntity.badRequest().build();
-        }
-
-        session.setAttribute("user", optional.get());
-
-        return ResponseEntity.ok(optional.get());
-    }
-
-    @PostMapping("/logout")
-    public ResponseEntity<Void> logout(HttpSession session) {
-        session.removeAttribute("user");
-
-        return ResponseEntity.ok().build();
-    }
-
-    @PostMapping("/register")
-    public ResponseEntity<User> register(@RequestBody RegisterRequest registerRequest) {
-        User created = new User(0,
-                registerRequest.getEmail(),
-                registerRequest.getPassword(),
-                registerRequest.getFirstName(),
-                registerRequest.getLastName());
-
-        return ResponseEntity.status(HttpStatus.CREATED).body(authService.register(created));
+        return ResponseEntity.ok().body(user);
     }
 }
