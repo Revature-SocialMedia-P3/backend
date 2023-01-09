@@ -1,19 +1,16 @@
 package com.revature.controllers;
 
-import com.revature.dtos.LoginRequest;
-import com.revature.dtos.RegisterRequest;
+import com.revature.dtos.RequestUser;
 import com.revature.models.User;
 import com.revature.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/auth")
-@CrossOrigin(origins = "http://localhost:4200", allowedHeaders = "*", exposedHeaders = "*", allowCredentials = "true")
+@CrossOrigin(origins = {"http://localhost:4200", "http://localhost:5555"}, allowedHeaders = "*", exposedHeaders = "*", allowCredentials = "true", maxAge = 3600)
 public class AuthController {
 
     private final UserService userService;
@@ -23,21 +20,10 @@ public class AuthController {
         this.userService = userService;
     }
 
-    @PostMapping("/login")
-    public ResponseEntity<User> login(@RequestBody LoginRequest loginRequest) {
-        Optional<User> optional = userService.login(loginRequest.getEmail(), loginRequest.getPassword());
+    @PostMapping("/get-user")
+    public ResponseEntity<User> getUser(@RequestBody RequestUser requestUser) {
+        User user = this.userService.getUser(requestUser);
 
-        if(optional.isEmpty()) {
-            return ResponseEntity.badRequest().build();
-        }
-
-        return ResponseEntity.ok(optional.get());
-    }
-
-    @PostMapping("/register")
-    public ResponseEntity<User> register(@RequestBody RegisterRequest registerRequest) {
-        User created = new User(registerRequest);
-
-        return ResponseEntity.status(HttpStatus.CREATED).body(userService.register(created));
+        return ResponseEntity.ok().body(user);
     }
 }

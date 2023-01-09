@@ -11,8 +11,10 @@ public class WebSecurityConfiguration {
     @Bean
     public SecurityFilterChain fireAuthFilterChain(HttpSecurity http) throws Exception{
         http.authorizeRequests().anyRequest().authenticated();
+
         http.oauth2ResourceServer().jwt();
         http.cors().configure(http);
+
         return http.build();
     }
 }
