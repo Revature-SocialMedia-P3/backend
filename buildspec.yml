@@ -14,8 +14,3 @@ phases:
 artifacts:
   files:
     - app.jar
-
-
-
-
-
