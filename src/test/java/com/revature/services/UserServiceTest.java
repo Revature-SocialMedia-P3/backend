@@ -26,7 +26,9 @@ class UserServiceTest {
     void test_getUser_returnsUser_givenUserAlreadyExists() {
         String username = "crazyUsername";
         String email = "validEmail@email.com";
-        RequestUser requestUser = new RequestUser(username, email);
+        RequestUser requestUser = new RequestUser();
+        requestUser.setUsername(username);
+        requestUser.setEmail(email);
         User user = new User(2, email, username);
 
         when(mockUserRepository.findByEmail(requestUser.getEmail())).thenReturn(Optional.of(user));
@@ -41,7 +43,9 @@ class UserServiceTest {
     void test_getUser_returnsUser_givenUserDoesNotExists() {
         String username = "crazyUsername";
         String email = "validEmail@email.com";
-        RequestUser requestUser = new RequestUser(username, email);
+        RequestUser requestUser = new RequestUser();
+        requestUser.setUsername(username);
+        requestUser.setEmail(email);
         User user = new User(requestUser);
 
         when(mockUserRepository.findByEmail(requestUser.getEmail())).thenReturn(Optional.empty());

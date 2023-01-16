@@ -6,13 +6,14 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Data
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "users")
-public class User {
+public class User implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,5 +24,6 @@ public class User {
     public User(RequestUser requestUser) {
         this.email = requestUser.getEmail();
         this.username = requestUser.getUsername();
+        this.id = requestUser.getId();
     }
 }
