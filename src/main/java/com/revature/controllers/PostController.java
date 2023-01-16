@@ -2,6 +2,7 @@ package com.revature.controllers;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,26 +23,25 @@ import com.revature.services.PostService;
 public class PostController {
 
 	private final PostService postService;
-
+    @Autowired
     public PostController(PostService postService) {
         this.postService = postService;
     }
     
 
-    @GetMapping("/my-feed")
-    public ResponseEntity<List<Post>> getAllMyPosts() {
-    	return ResponseEntity.ok(this.postService.getAll());
+    @GetMapping("/my-feed/{id}")
+    public ResponseEntity<List<Post>> getAllMyPosts(@PathVariable int id) {
+    	return ResponseEntity.ok(this.postService.getAllById(id));
     }
-    
-    @Authorized
-    @PutMapping
+
+    @PostMapping("/upsert")
     public ResponseEntity<Post> upsertPost(@RequestBody Post post) {
     	return ResponseEntity.ok(this.postService.upsert(post));
     }
-
-    @GetMapping("/feed")
-    public ResponseEntity<List<Post>> getAllTopPosts() {
-        return ResponseEntity.ok(this.postService.getAllTop());
-    }
+//
+//    @GetMapping("/feed")
+//    public ResponseEntity<List<Post>> getAllTopPosts() {
+//        return ResponseEntity.ok(this.postService.getAllTop());
+//    }
 
 }

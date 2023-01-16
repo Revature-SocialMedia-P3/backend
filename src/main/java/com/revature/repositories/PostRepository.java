@@ -9,7 +9,6 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface PostRepository extends JpaRepository<Post, Integer>{
-    @Query(value = "SELECT ")
-    List<Post> findAllByUser(User user);
 
+    List<Post> findAllByAuthor_Id(int id);
 }
