@@ -1,6 +1,6 @@
 package com.revature.models;
 
-import java.util.List;
+import java.util.*;
 
 import javax.persistence.*;
 
@@ -18,12 +18,34 @@ public class Post {
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-	private String text;
-	private String imageUrl;
-	@OneToMany(cascade = CascadeType.ALL)
-	private List<Post> comments;
 	@ManyToOne
-	private User author;
+	@JoinColumn(name = "author_id")
+	private User author ;
 
-	private PostType postType;
+	private Date date;
+
+	private String game;
+
+	private int time;
+
+	private String youtubeURL;
+
+	private String content;
+
+	@OneToMany(
+			mappedBy = "postId",
+			cascade = CascadeType.ALL,
+			fetch = FetchType.LAZY,
+			targetEntity = Comment.class
+	)
+	private List<Comment> comments = new ArrayList<>();
+
+//	public Post (ForumPostRequest forumPostRequest, User user){
+//		this.author = user;
+//		this.date = forumPostRequest.getDate();
+//		this.topic = forumPostRequest.getTopic();
+//		this.content = forumPostRequest.getContent();
+//	}
+
+
 }
