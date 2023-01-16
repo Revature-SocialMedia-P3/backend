@@ -18,7 +18,7 @@ import com.revature.services.PostService;
 
 @RestController
 @RequestMapping("/post")
-@CrossOrigin(origins = {"http://localhost:4200", "http://localhost:3000"}, allowCredentials = "true")
+@CrossOrigin(origins = {"http://localhost:4200", "http://localhost:5555"}, allowedHeaders = "*", exposedHeaders = "*", allowCredentials = "true", maxAge = 3600)
 public class PostController {
 
 	private final PostService postService;
@@ -28,8 +28,8 @@ public class PostController {
     }
     
 
-    @GetMapping
-    public ResponseEntity<List<Post>> getAllPosts() {
+    @GetMapping("/my-feed")
+    public ResponseEntity<List<Post>> getAllMyPosts() {
     	return ResponseEntity.ok(this.postService.getAll());
     }
     

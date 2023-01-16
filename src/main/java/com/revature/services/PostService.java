@@ -2,7 +2,6 @@ package com.revature.services;
 
 import java.util.List;
 
-import com.revature.models.PostType;
 import org.springframework.stereotype.Service;
 
 import com.revature.models.Post;
