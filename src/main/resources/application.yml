@@ -27,3 +27,7 @@ spring:
     auto: true
     proxy-target-class: true
 
+  jackson:
+    serialization:
+      fail-on-empty-beans: false
+
