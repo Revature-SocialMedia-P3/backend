@@ -26,4 +26,11 @@ public class AuthController {
 
         return ResponseEntity.ok().body(user);
     }
+
+    @PutMapping("/update-user")
+    public ResponseEntity<User> updateUser(@RequestBody RequestUser requestUser) {
+        User user = this.userService.saveUser(requestUser);
+
+        return ResponseEntity.ok().body(user);
+    }
 }
