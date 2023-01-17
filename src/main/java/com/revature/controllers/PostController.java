@@ -1,6 +1,7 @@
 package com.revature.controllers;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -33,15 +34,20 @@ public class PostController {
     public ResponseEntity<List<Post>> getAllMyPosts(@PathVariable int id) {
     	return ResponseEntity.ok(this.postService.getAllById(id));
     }
+    @GetMapping("/top-feed")
+    public ResponseEntity<List<Post>> getTopPosts(){
+        return ResponseEntity.ok(this.postService.getTopPosts());
+    }
+    @GetMapping("/leaderboard")
+    public ResponseEntity <Map<String, Post>> getLeaderboard(){
+        return ResponseEntity.ok(this.postService.getLeaderboard());
+    }
 
     @PostMapping("/upsert")
     public ResponseEntity<Post> upsertPost(@RequestBody Post post) {
     	return ResponseEntity.ok(this.postService.upsert(post));
     }
-//
-//    @GetMapping("/feed")
-//    public ResponseEntity<List<Post>> getAllTopPosts() {
-//        return ResponseEntity.ok(this.postService.getAllTop());
-//    }
+
+
 
 }

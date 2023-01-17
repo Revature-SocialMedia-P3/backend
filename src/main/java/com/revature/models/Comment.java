@@ -3,6 +3,7 @@ package com.revature.models;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -25,7 +26,6 @@ public class Comment {
     @ManyToOne
     @JoinColumn(name="commenter", nullable = false)
     private User commenter;
-
     @Column(name="date")
     private Date date;
 
