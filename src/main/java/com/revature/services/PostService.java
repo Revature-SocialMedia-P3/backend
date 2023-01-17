@@ -28,4 +28,16 @@ public class PostService {
 	public List<Post> getAllTop() {
 		return postRepository.findAllByPostType(PostType.Top);
 	}
+
+	public List<Post> likePost(Post post){
+		post = postRepository.getById(post.getId());
+		return postRepository.addLike(post);
+	}
+
+	public List<Post> dislikePost(Post post){
+		post = postRepository.getById(post.getId());
+		return postRepository.removeLike(post);
+	}
+
+
 }

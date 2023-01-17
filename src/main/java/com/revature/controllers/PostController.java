@@ -44,4 +44,12 @@ public class PostController {
         return ResponseEntity.ok(this.postService.getAllTop());
     }
 
+
+    @PutMapping("/post/like")
+    public ResponseEntity<List<Post>> addLikeToPost(Post post){return ResponseEntity.ok(this.postService.likePost(post));}
+
+
+    @PutMapping("/post/dislike")
+    public ResponseEntity<List<Post>> addDislikeToPost(Post post){return ResponseEntity.ok(this.postService.dislikePost(post));}
+
 }
