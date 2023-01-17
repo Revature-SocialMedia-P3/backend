@@ -10,5 +10,9 @@ import java.util.List;
 
 public interface PostRepository extends JpaRepository<Post, Integer>{
 
-    List<Post> findAllByAuthor_Id(int id);
+    List<Post> findAllByAuthor_IdOrderByDateDesc(int id);
+
+    List<Post> findTop10ByOrderByDateDesc();
+
+    Post findTop1ByGameOrderByTime(String game);
 }
