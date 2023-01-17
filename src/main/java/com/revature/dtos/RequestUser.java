@@ -4,11 +4,13 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class LoginRequest {
-
-    private String email;
-    private String password;
+public class RequestUser implements Serializable {
+    int id;
+    String username;
+    String email;
 }

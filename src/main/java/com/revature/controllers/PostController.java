@@ -1,7 +1,9 @@
 package com.revature.controllers;
 
 import java.util.List;
+import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,30 +20,34 @@ import com.revature.services.PostService;
 
 @RestController
 @RequestMapping("/post")
-@CrossOrigin(origins = {"http://localhost:4200", "http://localhost:3000"}, allowCredentials = "true")
+@CrossOrigin(origins = {"http://localhost:4200", "http://localhost:5555"}, allowedHeaders = "*", exposedHeaders = "*", allowCredentials = "true", maxAge = 3600)
 public class PostController {
 
 	private final PostService postService;
-
+    @Autowired
     public PostController(PostService postService) {
         this.postService = postService;
     }
     
 
-    @GetMapping
-    public ResponseEntity<List<Post>> getAllPosts() {
-    	return ResponseEntity.ok(this.postService.getAll());
+    @GetMapping("/my-feed/{id}")
+    public ResponseEntity<List<Post>> getAllMyPosts(@PathVariable int id) {
+    	return ResponseEntity.ok(this.postService.getAllById(id));
     }
-    
-    @Authorized
-    @PutMapping
+    @GetMapping("/top-feed")
+    public ResponseEntity<List<Post>> getTopPosts(){
+        return ResponseEntity.ok(this.postService.getTopPosts());
+    }
+    @GetMapping("/leaderboard")
+    public ResponseEntity <Map<String, Post>> getLeaderboard(){
+        return ResponseEntity.ok(this.postService.getLeaderboard());
+    }
+
+    @PostMapping("/upsert")
     public ResponseEntity<Post> upsertPost(@RequestBody Post post) {
     	return ResponseEntity.ok(this.postService.upsert(post));
     }
 
-    @GetMapping("/feed")
-    public ResponseEntity<List<Post>> getAllTopPosts() {
-        return ResponseEntity.ok(this.postService.getAllTop());
-    }
+
 
 }
