@@ -44,6 +44,10 @@ public class PostService {
 		return ret;
 	}
 
+	public List<User> userSearch(String user) {
+		return this.userRepository.findByUsernameContains(user);
+	}
+
 
 //	public List<Post> getAllTop() {
 //		return postRepository.findAllByPostType(PostType.Top);
