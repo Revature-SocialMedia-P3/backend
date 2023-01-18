@@ -3,6 +3,7 @@ package com.revature.controllers;
 import java.util.List;
 import java.util.Map;
 
+import com.revature.models.Comment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -46,6 +47,10 @@ public class PostController {
     @PostMapping("/upsert")
     public ResponseEntity<Post> upsertPost(@RequestBody Post post) {
     	return ResponseEntity.ok(this.postService.upsert(post));
+    }
+    @PostMapping("/comment")
+    public  ResponseEntity<Comment> createComment(@RequestBody Comment comment) {
+        return ResponseEntity.ok(this.postService.createComment(comment));
     }
 
 

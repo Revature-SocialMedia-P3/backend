@@ -38,14 +38,6 @@ public class Post {
 			fetch = FetchType.LAZY,
 			targetEntity = Comment.class
 	)
-	private List<Comment> comments = new ArrayList<>();
-
-//	public Post (ForumPostRequest forumPostRequest, User user){
-//		this.author = user;
-//		this.date = forumPostRequest.getDate();
-//		this.topic = forumPostRequest.getTopic();
-//		this.content = forumPostRequest.getContent();
-//	}
-
+	private List<Comment> postComments = new ArrayList<>();
 
 }
