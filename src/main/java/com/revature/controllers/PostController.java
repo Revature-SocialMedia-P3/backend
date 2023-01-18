@@ -15,7 +15,11 @@ import com.revature.services.PostService;
 
 @RestController
 @RequestMapping("/post")
-@CrossOrigin(origins = {"http://localhost:4200", "http://localhost:5555"}, allowedHeaders = "*", exposedHeaders = "*", allowCredentials = "true", maxAge = 2592000)
+@CrossOrigin(origins = {
+        "http://localhost:4200",
+        "http://localhost:5555",
+        "http://highscoreio-frontend-bucket.s3-website.us-east-2.amazonaws.com"
+}, allowedHeaders = "*", exposedHeaders = "*", allowCredentials = "true", maxAge = 2592000)
 public class PostController {
 
 	private final PostService postService;
