@@ -29,15 +29,23 @@ public class PostService {
 		return postRepository.findAllByPostType(PostType.Top);
 	}
 
-	public List<Post> likePost(Post post){
-		post = postRepository.getById(post.getId());
-		return postRepository.addLike(post);
+	/*
+
+	public int likePost(int postId){
+		Post post = postRepository.getById(postId);
+		postRepository.addLike(post);
+		return post.getLikes();
 	}
 
-	public List<Post> dislikePost(Post post){
-		post = postRepository.getById(post.getId());
-		return postRepository.removeLike(post);
+	public int dislikePost(int postId){
+		Post post = postRepository.getById(postId);
+		postRepository.removeLike(post);
+		return post.getLikes();
 	}
 
-
+	public int getLikeCount(int postId){
+		Post post = postRepository.getById(postId);
+		return post.getLikes();
+	}
+	 */
 }

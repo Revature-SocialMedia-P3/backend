@@ -1,30 +1,33 @@
 package com.revature;
 
+import com.revature.controllers.PostController;
 import com.revature.models.Post;
 import com.revature.models.PostType;
 import com.revature.models.User;
+import com.revature.services.PostService;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-
+import org.springframework.boot.test.mock.mockito.MockBean;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.skyscreamer.jsonassert.JSONAssert.assertEquals;
+
 
 @SpringBootTest
 class SocialMediaApplicationTests {
+	@Autowired
+	private PostController postController;
+
+	@Autowired
+	private PostService postService;
 
 	@Test
-	void contextLoads() {
-	}
-
-
-	@Test
-	boolean likesChanged(){
-		User Author = new User();
-		List<Post> comments = new ArrayList<Post>();
-		Post testPost = new Post(1,"Test","url.url",comments,Author, PostType.Top,5);
-		return false;
+	public void contextLoads() {
+		Assertions.assertNotNull(postController);
+		Assertions.assertNotNull(postService);
 	}
 
 

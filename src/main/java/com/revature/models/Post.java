@@ -27,5 +27,4 @@ public class Post {
 
 	private PostType postType;
 
-	private int likes;
 }

@@ -44,12 +44,15 @@ public class PostController {
         return ResponseEntity.ok(this.postService.getAllTop());
     }
 
+/*
+    @PutMapping("/post/like/{postId}")
+    public ResponseEntity<Integer> addLikeToPost(@PathVariable int postId){return ResponseEntity.ok(this.postService.likePost(postId));}
 
-    @PutMapping("/post/like")
-    public ResponseEntity<List<Post>> addLikeToPost(Post post){return ResponseEntity.ok(this.postService.likePost(post));}
 
+    @PutMapping("/post/dislike/{postId}")
+    public ResponseEntity<Integer> addDislikeToPost(@PathVariable int postId){return ResponseEntity.ok(this.postService.dislikePost(postId));}
 
-    @PutMapping("/post/dislike")
-    public ResponseEntity<List<Post>> addDislikeToPost(Post post){return ResponseEntity.ok(this.postService.dislikePost(post));}
-
+    @GetMapping("/post/likeCount/{postId}")
+    public ResponseEntity<Integer> getPostLikes(@PathVariable int postId){return ResponseEntity.ok(this.postService.getLikeCount(postId));}
+*/
 }
