@@ -2,18 +2,12 @@ package com.revature.controllers;
 
 import java.util.List;
 import java.util.Map;
-
 import com.revature.models.Comment;
+import com.revature.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.revature.annotations.Authorized;
 import com.revature.models.Post;
@@ -21,7 +15,7 @@ import com.revature.services.PostService;
 
 @RestController
 @RequestMapping("/post")
-@CrossOrigin(origins = {"http://localhost:4200", "http://localhost:5555"}, allowedHeaders = "*", exposedHeaders = "*", allowCredentials = "true", maxAge = 3600)
+@CrossOrigin(origins = {"http://localhost:4200", "http://localhost:5555"}, allowedHeaders = "*", exposedHeaders = "*", allowCredentials = "true", maxAge = 2592000)
 public class PostController {
 
 	private final PostService postService;
@@ -53,6 +47,10 @@ public class PostController {
         return ResponseEntity.ok(this.postService.createComment(comment));
     }
 
+    @GetMapping("/search")
+    public ResponseEntity<List<User>> userSearch(@RequestParam String user) {
+        return ResponseEntity.ok(this.postService.userSearch(user));
+    }
 
 
 }

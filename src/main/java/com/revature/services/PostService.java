@@ -48,6 +48,10 @@ public class PostService {
 		return ret;
 	}
 
+	public List<User> userSearch(String user) {
+		return this.userRepository.findByUsernameContains(user);
+	}
+
 
 	public Comment createComment(Comment comment) {
 		return this.commentRepository.save(comment);
