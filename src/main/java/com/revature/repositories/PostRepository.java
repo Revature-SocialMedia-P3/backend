@@ -12,7 +12,7 @@ public interface PostRepository extends JpaRepository<Post, Integer>{
 
     List<Post> findAllByAuthor_IdOrderByDateDesc(int id);
 
-    List<Post> findTop10ByOrderByDateDesc();
+    List<Post> findTop20ByOrderByDateDesc();
 
     Post findTop1ByGameOrderByTime(String game);
 }

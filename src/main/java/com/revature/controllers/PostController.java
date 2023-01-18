@@ -2,7 +2,7 @@ package com.revature.controllers;
 
 import java.util.List;
 import java.util.Map;
-
+import com.revature.models.Comment;
 import com.revature.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.Query;
@@ -42,6 +42,11 @@ public class PostController {
     public ResponseEntity<Post> upsertPost(@RequestBody Post post) {
     	return ResponseEntity.ok(this.postService.upsert(post));
     }
+    @PostMapping("/comment")
+    public  ResponseEntity<Comment> createComment(@RequestBody Comment comment) {
+        return ResponseEntity.ok(this.postService.createComment(comment));
+    }
+
     @GetMapping("/search")
     public ResponseEntity<List<User>> userSearch(@RequestParam String user) {
         return ResponseEntity.ok(this.postService.userSearch(user));
