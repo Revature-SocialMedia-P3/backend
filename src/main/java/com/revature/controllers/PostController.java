@@ -2,17 +2,12 @@ package com.revature.controllers;
 
 import java.util.List;
 import java.util.Map;
-
+import com.revature.models.Comment;
+import com.revature.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.revature.annotations.Authorized;
 import com.revature.models.Post;
@@ -20,7 +15,11 @@ import com.revature.services.PostService;
 
 @RestController
 @RequestMapping("/post")
-@CrossOrigin(origins = {"http://localhost:4200", "http://localhost:5555"}, allowedHeaders = "*", exposedHeaders = "*", allowCredentials = "true", maxAge = 3600)
+@CrossOrigin(origins = {
+        "http://localhost:4200",
+        "http://localhost:5555",
+        "http://highscoreio-frontend-bucket.s3-website.us-east-2.amazonaws.com"
+}, allowedHeaders = "*", exposedHeaders = "*", allowCredentials = "true", maxAge = 2592000)
 public class PostController {
 
 	private final PostService postService;
@@ -47,7 +46,28 @@ public class PostController {
     public ResponseEntity<Post> upsertPost(@RequestBody Post post) {
     	return ResponseEntity.ok(this.postService.upsert(post));
     }
+    @PostMapping("/comment")
+    public  ResponseEntity<Comment> createComment(@RequestBody Comment comment) {
+        return ResponseEntity.ok(this.postService.createComment(comment));
+    }
 
+
+/*
+    @PutMapping("/post/like/{postId}")
+    public ResponseEntity<Integer> addLikeToPost(@PathVariable int postId){return ResponseEntity.ok(this.postService.likePost(postId));}
+
+
+    @PutMapping("/post/dislike/{postId}")
+    public ResponseEntity<Integer> addDislikeToPost(@PathVariable int postId){return ResponseEntity.ok(this.postService.dislikePost(postId));}
+
+    @GetMapping("/post/likeCount/{postId}")
+    public ResponseEntity<Integer> getPostLikes(@PathVariable int postId){return ResponseEntity.ok(this.postService.getLikeCount(postId));}
+*/
+
+    @GetMapping("/search")
+    public ResponseEntity<List<User>> userSearch(@RequestParam String user) {
+        return ResponseEntity.ok(this.postService.userSearch(user));
+    }
 
 
 }

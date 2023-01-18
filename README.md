@@ -1,4 +1,5 @@
 # backend
+
 # SocialMediaAngular
 
 ## Architecture
@@ -8,4 +9,3 @@
 ## Running unit tests
 
 Run Junit tests along with Jacoco.
-

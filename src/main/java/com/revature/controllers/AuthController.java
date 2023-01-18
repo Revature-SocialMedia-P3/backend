@@ -10,7 +10,11 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/auth")
-@CrossOrigin(origins = {"http://localhost:4200", "http://localhost:5555"}, allowedHeaders = "*", exposedHeaders = "*", allowCredentials = "true", maxAge = 3600)
+@CrossOrigin(origins = {
+        "http://localhost:4200",
+        "http://localhost:5555",
+        "http://highscoreio-frontend-bucket.s3-website.us-east-2.amazonaws.com"
+}, allowedHeaders = "*", exposedHeaders = "*", allowCredentials = "true", maxAge = 2592000)
 public class AuthController {
 
     private final UserService userService;
