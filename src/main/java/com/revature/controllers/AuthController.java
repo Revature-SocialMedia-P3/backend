@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/auth")
-@CrossOrigin(origins = {"http://localhost:4200", "http://localhost:5555"}, allowedHeaders = "*", exposedHeaders = "*", allowCredentials = "true", maxAge = 3600)
+@CrossOrigin(origins = {"http://localhost:4200", "http://localhost:5555"}, allowedHeaders = "*", exposedHeaders = "*", allowCredentials = "true", maxAge = 2592000)
 public class AuthController {
 
     private final UserService userService;
@@ -23,6 +23,13 @@ public class AuthController {
     @PostMapping("/get-user")
     public ResponseEntity<User> getUser(@RequestBody RequestUser requestUser) {
         User user = this.userService.getUser(requestUser);
+
+        return ResponseEntity.ok().body(user);
+    }
+
+    @PutMapping("/update-user")
+    public ResponseEntity<User> updateUser(@RequestBody RequestUser requestUser) {
+        User user = this.userService.saveUser(requestUser);
 
         return ResponseEntity.ok().body(user);
     }

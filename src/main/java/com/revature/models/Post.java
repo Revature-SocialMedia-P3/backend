@@ -1,12 +1,13 @@
 package com.revature.models;
 
-import java.util.List;
+import java.util.*;
 
 import javax.persistence.*;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Data
 @Entity
@@ -18,13 +19,25 @@ public class Post {
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-	private String text;
-	private String imageUrl;
-	@OneToMany(cascade = CascadeType.ALL)
-	private List<Post> comments;
 	@ManyToOne
-	private User author;
+	@JoinColumn(name = "author_id")
+	private User author ;
+	private Date date;
 
-	private PostType postType;
+	private String game;
+
+	private int time;
+
+	private String youtubeURL;
+
+	private String content;
+
+	@OneToMany(
+			mappedBy = "postId",
+			cascade = CascadeType.ALL,
+			fetch = FetchType.LAZY,
+			targetEntity = Comment.class
+	)
+	private List<Comment> postComments = new ArrayList<>();
 
 }

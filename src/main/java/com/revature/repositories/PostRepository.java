@@ -1,6 +1,6 @@
 package com.revature.repositories;
 
-import com.revature.models.PostType;
+import com.revature.models.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.revature.models.Post;
@@ -24,8 +24,13 @@ public interface PostRepository extends JpaRepository<Post, Integer>{
 
 
 
-    List<Post> findAllByPostType(PostType postType);
-
     Post getById(int id);
+
+
+    List<Post> findAllByAuthor_IdOrderByDateDesc(int id);
+
+    List<Post> findTop20ByOrderByDateDesc();
+
+    Post findTop1ByGameOrderByTime(String game);
 
 }
