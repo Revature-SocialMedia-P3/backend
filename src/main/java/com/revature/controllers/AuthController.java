@@ -13,7 +13,8 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin(origins = {
         "http://localhost:4200",
         "http://localhost:5555",
-        "http://highscoreio-frontend-bucket.s3-website.us-east-2.amazonaws.com"
+        "http://highscoreio-frontend-bucket.s3-website.us-east-2.amazonaws.com",
+        "https://highscoreio-frontend-bucket.s3-website.us-east-2.amazonaws.com"
 }, allowedHeaders = "*", exposedHeaders = "*", allowCredentials = "true", maxAge = 2592000)
 public class AuthController {
 
