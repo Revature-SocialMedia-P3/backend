@@ -56,4 +56,24 @@ public class PostService {
 	public Comment createComment(Comment comment) {
 		return this.commentRepository.save(comment);
 	}
+
+	/*
+
+	public int likePost(int postId){
+		Post post = postRepository.getById(postId);
+		postRepository.addLike(post);
+		return post.getLikes();
+	}
+
+	public int dislikePost(int postId){
+		Post post = postRepository.getById(postId);
+		postRepository.removeLike(post);
+		return post.getLikes();
+	}
+
+	public int getLikeCount(int postId){
+		Post post = postRepository.getById(postId);
+		return post.getLikes();
+	}
+	 */
 }

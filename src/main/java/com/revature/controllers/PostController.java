@@ -47,6 +47,19 @@ public class PostController {
         return ResponseEntity.ok(this.postService.createComment(comment));
     }
 
+
+/*
+    @PutMapping("/post/like/{postId}")
+    public ResponseEntity<Integer> addLikeToPost(@PathVariable int postId){return ResponseEntity.ok(this.postService.likePost(postId));}
+
+
+    @PutMapping("/post/dislike/{postId}")
+    public ResponseEntity<Integer> addDislikeToPost(@PathVariable int postId){return ResponseEntity.ok(this.postService.dislikePost(postId));}
+
+    @GetMapping("/post/likeCount/{postId}")
+    public ResponseEntity<Integer> getPostLikes(@PathVariable int postId){return ResponseEntity.ok(this.postService.getLikeCount(postId));}
+*/
+
     @GetMapping("/search")
     public ResponseEntity<List<User>> userSearch(@RequestParam String user) {
         return ResponseEntity.ok(this.postService.userSearch(user));
