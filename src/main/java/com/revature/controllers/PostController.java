@@ -15,7 +15,11 @@ import com.revature.services.PostService;
 
 @RestController
 @RequestMapping("/post")
-@CrossOrigin(origins = {"http://localhost:4200", "http://localhost:5555"}, allowedHeaders = "*", exposedHeaders = "*", allowCredentials = "true", maxAge = 2592000)
+@CrossOrigin(origins = {
+        "http://localhost:4200",
+        "http://localhost:5555",
+        "http://highscoreio-frontend-bucket.s3-website.us-east-2.amazonaws.com"
+}, allowedHeaders = "*", exposedHeaders = "*", allowCredentials = "true", maxAge = 2592000)
 public class PostController {
 
 	private final PostService postService;
@@ -46,6 +50,19 @@ public class PostController {
     public  ResponseEntity<Comment> createComment(@RequestBody Comment comment) {
         return ResponseEntity.ok(this.postService.createComment(comment));
     }
+
+
+/*
+    @PutMapping("/post/like/{postId}")
+    public ResponseEntity<Integer> addLikeToPost(@PathVariable int postId){return ResponseEntity.ok(this.postService.likePost(postId));}
+
+
+    @PutMapping("/post/dislike/{postId}")
+    public ResponseEntity<Integer> addDislikeToPost(@PathVariable int postId){return ResponseEntity.ok(this.postService.dislikePost(postId));}
+
+    @GetMapping("/post/likeCount/{postId}")
+    public ResponseEntity<Integer> getPostLikes(@PathVariable int postId){return ResponseEntity.ok(this.postService.getLikeCount(postId));}
+*/
 
     @GetMapping("/search")
     public ResponseEntity<List<User>> userSearch(@RequestParam String user) {
