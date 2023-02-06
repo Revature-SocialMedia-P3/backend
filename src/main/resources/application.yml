@@ -22,10 +22,10 @@ spring:
           time_zone=UTC
 
   datasource:
-    url: jdbc:postgresql://Revature-socialmedia-p3.c4a5ytscplod.us-east-1.rds.amazonaws.com:5432/postgres
+    url: ${RDS_URL}
     driver-class-name: org.postgresql.Driver
-    username: postgres
-    password: RevCapstone123!
+    username: ${RDS_UN}
+    password: ${RDS_PASS}
 
   aop:
     auto: true
